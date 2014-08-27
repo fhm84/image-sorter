@@ -1,0 +1,11 @@
+/target
+/.settings
+/.svn
+/image-sorter-cli/.project
+/image-sorter-cli/.settings
+/image-sorter-cli/target
+/image-sorter-cli/.classpath
+/image-sorter-core/.project
+/image-sorter-core/.settings
+/image-sorter-core/target
+/image-sorter-core/.classpath

@@ -1,0 +1,43 @@
+try {
+    // Read image EXIF data
+    LLJTran llj = new LLJTran(imageFile);
+    llj.read(LLJTran.READ_INFO, true);
+    AbstractImageInfo<?> imageInfo = llj.getImageInfo();
+    if (!(imageInfo instanceof Exif))
+        throw new Exception("Image has no EXIF data");
+
+    // Determine the orientation
+    Exif exif = (Exif) imageInfo;
+    int orientation = 1;
+    Entry orientationTag = exif.getTagValue(Exif.ORIENTATION, true);
+    if (orientationTag != null)
+        orientation = (Integer) orientationTag.getValue(0);
+
+    // Determine required transform operation
+    int operation = 0;
+    if (orientation > 0
+            && orientation < Exif.opToCorrectOrientation.length)
+        operation = Exif.opToCorrectOrientation[orientation];
+    if (operation == 0)
+        throw new Exception("Image orientation is already correct");
+
+    OutputStream output = null;
+    try {   
+        // Transform image
+        llj.read(LLJTran.READ_ALL, true);
+        llj.transform(operation, LLJTran.OPT_DEFAULTS
+                | LLJTran.OPT_XFORM_ORIENTATION);
+
+        // Overwrite original file
+        output = new BufferedOutputStream(new FileOutputStream(imageFile));
+        llj.save(output, LLJTran.OPT_WRITE_ALL);
+
+    } finally {
+        IOUtils.closeQuietly(output);
+        llj.freeMemory();
+    }
+
+} catch (Exception e) {
+    // Unable to rotate image based on EXIF data
+    ...
+}
