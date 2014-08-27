@@ -11,6 +11,6 @@ image-sorter
 - gui for "simulate"/run the sorting (show the modified dates)
 - gui to manipulate the "camera-settings" (including overview)
 - calculate the number of digits for the filename-pattern: done
-- set the number of digits for the filename-pattern from "outside"
+- set the number of digits for the filename-pattern from "outside": done
 - ...
 
