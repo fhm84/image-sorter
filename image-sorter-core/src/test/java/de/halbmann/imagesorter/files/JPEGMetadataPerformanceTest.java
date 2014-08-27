@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.halbmann.imagesorter.files;
 
 import java.io.File;
@@ -32,7 +29,7 @@ import com.drew.metadata.exif.ExifIFD0Directory;
 @Ignore
 public class JPEGMetadataPerformanceTest {
 
-	String path = "target/test-classes/images";// "D:\\\\2012.09.18 - 30 Urlaub auf Bali";
+	String path = "target/test-classes/images";
 
 	@Test
 	public void test_MultipleThreads() throws IOException {
